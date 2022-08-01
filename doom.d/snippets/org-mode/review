@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: review
+# uuid:
+# key: _review
+# condition: t
+# --
+
+#+SETUPFILE: ~/Documents/latex/reading_review/review.org
+#+LaTeX_HEADER: \newcommand{\ptitle}{$1}
+#+LaTeX_HEADER: \newcommand{\stitle}{$2}
+#+LaTeX_HEADER: \newcommand{\yourcourse}{$3}
+#+OPTIONS: toc:nil title:nil author:nil
+\input{~/Documents/latex/reading_review/title.tex}
+$0

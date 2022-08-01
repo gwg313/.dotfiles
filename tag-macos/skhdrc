@@ -1,0 +1,66 @@
+# Opens iTerm2
+ctrl - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
+
+# Close window
+ctrl - q : osascript -e 'tell application "System Events" to perform action "AXPress" of (first button whose subrole is "AXCloseButton") of (first window whose subrole is "AXStandardWindow") of (first process whose frontmost is true)'
+
+# Toggle window split type
+ctrl - v : yabai -m window --toggle split
+ 
+# Moves around windows
+ctrl - left : yabai -m window --focus west
+ctrl - down : yabai -m window --focus south
+ctrl - up : yabai -m window --focus north
+ctrl - right : yabai -m window --focus east
+
+# Moves windows
+shift + ctrl - left : yabai -m window --warp west
+shift + ctrl - down : yabai -m window --warp south
+shift + ctrl - up : yabai -m window --warp north
+shift + ctrl - right : yabai -m window --warp east
+
+# Resize windows
+shift + alt - left :  yabai -m window --resize left:-50:0; \
+                      yabai -m window --resize right:-50:0
+shift + alt - down :  yabai -m window --resize bottom:0:50; \
+                      yabai -m window --resize top:0:50
+shift + alt - up :    yabai -m window --resize top:0:-50; \
+                      yabai -m window --resize bottom:0:-50
+shift + alt - right : yabai -m window --resize right:50:0; \
+                      yabai -m window --resize left:50:0
+
+
+# Warps window to space
+shift + ctrl - 1 : yabai -m window --space  1 && yabai -m space --focus 1
+shift + ctrl - 2 : yabai -m window --space  2 && yabai -m space --focus 2
+shift + ctrl - 3 : yabai -m window --space  3 && yabai -m space --focus 3
+shift + ctrl - 4 : yabai -m window --space  4 && yabai -m space --focus 4
+
+# fast focus desktop
+ctrl - 1 : yabai -m space --focus 1
+ctrl - 2 : yabai -m space --focus 2
+ctrl - 3 : yabai -m space --focus 3
+ctrl - 4 : yabai -m space --focus 4
+ctrl - 5 : yabai -m space --focus 5
+ctrl - 6 : yabai -m space --focus 6
+ctrl - 7 : yabai -m space --focus 7
+ctrl - 8 : yabai -m space --focus 8
+ctrl - 9 : yabai -m space --focus 9
+ctrl - 0 : yabai -m space --focus 10
+
+# Launch Apps
+ctrl - o : open -n /Applications/Firefox.app
+
+# Make window native fullscreen
+ctrl - f         : yabai -m window --toggle zoom-fullscreen
+shift + ctrl - f : yabai -m window --toggle native-fullscreen
+
+# Rotate windows clockwise and anticlockwise
+alt - r         : yabai -m space --rotate 270
+shift + alt - r : yabai -m space --rotate 90
+
+# Restart Yabai
+shift + lctrl - r : \
+    /usr/bin/env osascript <<< \
+        "display notification \"Restarting Yabai\" with title \"Yabai\""; \
+    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"

@@ -1,0 +1,78 @@
+    #!/usr/bin/env sh
+
+    sudo yabai --load-sa
+    yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+    SPACEBAR_HEIGHT=$(spacebar -m config height)
+    yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
+
+    #source ~/.cache/wal/colors.sh # pywal scheme - update if needed
+
+
+    # yabai template colours
+    # CBACK=$(echo $background | sed 's/#//')
+    # CFORE=$(echo $foreground | sed 's/#//')
+    CACTV=$(echo $color3 | sed 's/#//')
+    CNORM=$(echo $color1 | sed 's/#//')
+    CINSE=$(echo $foreground | sed 's/#//')
+
+
+    # Configure borders
+    yabai -m config window_border                on
+    yabai -m config window_border_width          2
+    yabai -m config active_window_border_color   0xff$CACTV
+    yabai -m config normal_window_border_color   0xff$CNORM
+    yabai -m config insert_window_border_color   0xff$CINSE
+    
+    # global settings
+    yabai -m config mouse_follows_focus          on
+    yabai -m config focus_follows_mouse          autoraise
+    yabai -m config window_placement             second_child
+    yabai -m config window_topmost               on
+    yabai -m config window_shadow                on
+    yabai -m config window_opacity               off
+    yabai -m config window_opacity_duration      0.0
+    yabai -m config active_window_opacity        1.0
+    yabai -m config normal_window_opacity        0.90
+    yabai -m config split_ratio                  0.50
+    yabai -m config auto_balance                 off
+    yabai -m config mouse_modifier               ctrl
+    yabai -m config mouse_action1                move
+    yabai -m config mouse_action2                resize
+    yabai -m config mouse_drop_action            swap
+
+    # general space settings
+    yabai -m config layout                       bsp
+    yabai -m config top_padding                  20
+    yabai -m config bottom_padding               20
+    yabai -m config left_padding                 20
+    yabai -m config right_padding                20
+    yabai -m config window_gap                   20
+
+    # mission-control desktop labels
+    yabai -m space 1 --label main
+    yabai -m space 2 --label secondary
+    yabai -m space 3 --label random
+    yabai -m space 4 --label extra
+
+    # ===== Rules ==================================
+    yabai -m rule --add app="^Firefox$" title="^Opening .*$" manage=off  
+
+    yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+    yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+    yabai -m rule --add label="macfeh" app="^macfeh$" manage=off
+    yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
+    yabai -m rule --add label="App Store" app="^App Store$" manage=off
+    yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+    yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+    yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
+    yabai -m rule --add label="mpv" app="^mpv$" manage=off
+    yabai -m rule --add label="Software Update" title="Software Update" manage=off
+    yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+    yabai -m rule --add app="^Discord$" space=secondary
+    #yabai -m rule --add app="^Firefox$" space=main
+    yabai -m rule --add app="^iTerm$" title="Preferences" manage=off
+
+    set +x
+
+    echo "yabai configuration loaded.."

@@ -1,0 +1,9 @@
+[user]
+	email = glen.goodwin1992@gmail.com
+	name = Glen Goodwin
+	signingkey = EB03E13098E1787CC07CD88BC3C3AEBD40C7B447
+[core]
+	excudesfile = ~/.gitignore_global
+[commit]
+	template = /home/glen/.gittemplate
+	gpgsign = true

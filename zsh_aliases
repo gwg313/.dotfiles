@@ -1,0 +1,349 @@
+#!/bin/zsh
+
+if command -v xbps-install > /dev/null 2>&1; then
+  export IS_VOID=1
+elif command -v emerge > /dev/null 2>&1; then
+  export IS_GENTO=1
+elif command -v pacman > /dev/null 2>&1; then
+  export IS_ARCH=1
+elif command -v apt-get > /dev/null 2>&1; then
+  export IS_DEBIAN=1
+elif command -v apk > /dev/null 2>&1; then
+  export IS_ALPINE=1
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  export IS_MAC=1
+else;
+  export IS_BSD=1
+fi
+
+
+
+# Default flags
+alias rm='rm -i'
+alias chmod="chmod -R"
+alias cp='cp -R -i -v'
+alias mv='mv -i -v'
+alias mkdir='mkdir -p -v'
+alias df='df -h'
+alias du='du -h -s'
+alias dd='dd status=progress bs=4M conv=fdatasync '
+alias wgetpaste='wgetpaste -Xx'
+alias sudo='sudo '  # Makes sudo work with aliases
+alias ssh='TERM=xterm ssh'  # Fixes some issues with ssh on some terminals
+alias wget="wget -c"
+alias ping="ping -c 5"
+
+# Shortcuts to edit common files
+alias reload='source ~/.zshrc'
+alias zshrc="$EDITOR ~/.zshrc"
+alias zshenv="$EDITOR ~/.zshenv"
+alias zshaliases="$EDITOR ~/.zsh_aliases"
+alias keybinds="$EDITOR ~/.keybinds"
+
+# Changing dirs with just dots.
+alias .='cd ../'
+alias ..='cd ../../'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+
+# Misc alieses I use often
+alias tcn='mv --force -t ~/.local/share/Trash '
+alias ports='netstat -tulanp'
+alias rmd='"rm" -rf'
+alias mine="sudo chown -R $(whoami):users"
+alias benchmark='hyperfine --warmup 3 '
+alias c="clear"
+alias trash="mv --force -t ~/.local/share/Trash"
+alias dtrash="find ~/.local/share/Trash -type f -exec rm {} \;"
+alias listen="lsof -P -i -n" 
+alias nc="nordvpn connect sweden"
+alias nd="nordvpn disconnect"
+alias tra="transmission-remote -a"
+alias vda="for i in `vagrant global-status | grep virtualbox | awk '{ print $1 }'` ; do vagrant destroy $i ; done"
+alias clock="sudo ntpd -gq"
+# Some useful nmap aliases for scan modes
+
+# Nmap options are:
+#  -sS - TCP SYN scan
+#  -v - verbose
+#  -T1 - timing of scan. Options are paranoid (0), sneaky (1), polite (2), normal (3), aggressive (4), and insane (5)
+#  -sF - FIN scan (can sneak through non-stateful firewalls)
+#  -PE - ICMP echo discovery probe
+#  -PP - timestamp discovery probe
+#  -PY - SCTP init ping
+#  -g - use given number as source port
+#  -A - enable OS detection, version detection, script scanning, and traceroute (aggressive)
+#  -O - enable OS detection
+#  -sA - TCP ACK scan
+#  -F - fast scan
+#  --script=vuln - also access vulnerabilities in target
+
+alias nmap_open_ports="nmap --open"
+alias nmap_list_interfaces="nmap --iflist"
+alias nmap_slow="sudo nmap -sS -v -T1"
+alias nmap_fin="sudo nmap -sF -v"
+alias nmap_full="sudo nmap -sS -T4 -PE -PP -PS80,443 -PY -g 53 -A -p1-65535 -v"
+alias nmap_check_for_firewall="sudo nmap -sA -p1-65535 -v -T4"
+alias nmap_ping_through_firewall="nmap -PS -PA"
+alias nmap_fast="nmap -F -T5 --version-light --top-ports 300"
+alias nmap_detect_versions="sudo nmap -sV -p1-65535 -O --osscan-guess -T4 -Pn"
+alias nmap_check_for_vulns="nmap --script=vuln"
+alias nmap_full_udp="sudo nmap -sS -sU -T4 -A -v -PE -PS22,25,80 -PA21,23,80,443,3389 "
+alias nmap_traceroute="sudo nmap -sP -PE -PS22,25,80 -PA21,23,80,3389 -PU -PO --traceroute "
+alias nmap_full_with_scripts="sudo nmap -sS -sU -T4 -A -v -PE -PP -PS21,22,23,25,80,113,31339 -PA80,113,443,10042 -PO --script all " 
+alias nmap_web_safe_osscan="sudo nmap -p 80,443 -O -v --osscan-guess --fuzzy "
+alias nmap_ping_scan="nmap -n -sP"
+alias nmap-qsp='nmap -sV -T4 -O -F --version-light'
+
+if command -v grc > /dev/null 2>&1; then
+    [[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
+fi
+
+if [ "${IS_ARCH}" = "1" ]; then
+  ## Package Manager - pacman/yay
+  if command -v yay > /dev/null 2>&1; then
+    alias pi='yay -S'
+    alias pr='yay -R'
+    alias psearch='yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S'
+    alias pu='yay -Syu --devel --timeupdate'
+    alias oneshot='yay -S --asdeps'
+    alias orphans="yay -Qtdq | yay -Rns -"
+  else;
+    alias pi='sudo pacman -S'
+    alias pr='sudo pacman -R'
+    alias psearch='pacman -Slq | fzf --multi --preview 'sudo pacman -Si {1}' | xargs -ro sudo pacman -S'
+    alias pu='sudo pacman -Syu'
+    alias oneshot='sudo pacman -S --asdeps'
+    alias orphans="pacman -Qtdq | sudo pacman -Rns -"
+  fi
+  alias mirrorupdate="sudo pacman-mirrors --geoip && sudo pacman -Syyu"
+  alias etc-update="sudo pacdiff"
+  alias asdep="sudo pacman -D --asdeps"
+  alias explicit="sudo pacman -D --asexplicit"
+
+elif [ "${IS_DEBIAN}" = "1" ]; then
+  ## Package Manager - apt
+  alias pi='sudo apt install'
+  alias pr='sudo apt remove'
+  alias psearch='apt search'
+  alias pu='sudo apt update && sudo apt upgrade'
+  alias orphans='apt autoremove'
+
+elif [ "${IS_GENTOO}" = "1" ]; then
+  ## Package Manager - portage/emerge
+  alias gsync='sudo eix-sync'
+  alias pi='sudo emerge -av --autounmask'
+  alias oneshot='sudo emerge -av --oneshot'
+  alias pu='sudo emerge --update --deep --with-bdeps=y --newuse --keep-going @world --ask'
+  alias pub='sudo emerge --update --deep --with-bdeps=y --newuse --keep-going @world --ask --binpkg-changed-deps'
+  alias pr='sudo emerge --depclean -av'
+  alias psearch='eix -r'
+  alias pclean='sudo qpkg -c'
+  alias howlong='sudo watch --color genlop -uic'
+  alias etcupdate='sudo -E etc-update --automode -3'
+
+elif [ "${IS_ALPINE}" = "1" ]; then
+  ## Package Manager - apk
+  alias pi='sudo apk add'
+  alias pr='sudo apk del'
+  alias psearch='sudo apk search'
+  alias pu='sudo apk update && sudo apk upgrade'
+
+elif [ "${IS_VOID}" = "1" ]; then
+  ## Package Manager - void/xpbs
+  alias pi='sudo xbps-install -S'
+  alias prr='sudo xbps-remove -R'
+  alias pr='sudo xbps-remove'
+  alias psearch='sudo xbps-query -Rs'
+  alias pu='sudo xbps-install -Su'
+  alias orphans='sudo xpbs-remove -o'
+
+elif [ "${IS_MAC}" = "1" ]; then
+  ## Package Manager - brew
+  function pi {
+      brew install "${@:1}"
+      brew bundle dump --force --file=$HOMEBREW_BREWFILE
+  }
+  function pic {
+      brew install cask "${@:1}"
+      brew bundle dump --force --file=$HOMEBREW_BREWFILE
+  }
+  function pr {
+      brew uninstall cask "${@:1}"
+      brew bundle dump --force --file=$HOMEBREW_BREWFILE
+  }
+  alias psearch='brew search'
+  alias pu='brew update && brew upgrade'
+  alias orphans='brew autoremove'
+
+
+  function macwal {
+      # generate color scheme from current wallpaper
+      current_wallpaper="$(osascript -e 'tell app "finder" to get posix path of (get desktop picture as alias)')"
+      wal -i $current_wallpaper
+  }
+
+elif [ "${IS_BSD}" = 1 ]; then
+  ## Package Manager - freebsd
+  alias pi='sudo pkg install'
+  alias pr='sudo pkg remove'
+  alias psearch='sudo pkg search'
+  alias pu='sudo pkg update && sudo pkg upgrade'
+
+fi
+
+# Alias alternatives for commands if they exist
+
+if command -v btm > /dev/null 2>&1; then
+  alias top="btm"
+  alias htop="btm"
+fi
+if command -v tmux > /dev/null 2>&1; then
+  alias ta="tmux attach -t"
+  alias tad="tmux attach -d -t"
+  alias ts="tmux new-session -s"
+  alias tl="tmux list-sessions"
+  alias tksv="tmux kill-server"
+  alias tkss="tmux kill-session -t"
+fi
+if command -v zi > /dev/null 2>&1; then
+  alias cd="z"
+  alias ci="zi"
+fi
+if command -v procs > /dev/null 2>&1; then
+  alias ps="procs"
+fi
+if command -v hyperfine > /dev/null 2>&1; then
+  alias time="hyperfine"
+fi
+if command -v dust > /dev/null 2>&1; then
+  alias du="dust"
+fi
+if command -v fd > /dev/null 2>&1; then
+  alias find="fd"
+fi
+if command -v colordiff > /dev/null 2>&1; then
+  alias diff="colordiff -Nuar"
+else
+  alias diff="diff -Nuar"
+fi
+if command -v lf > /dev/null 2>&1; then
+  alias ranger="lf"
+fi
+if command -v rg > /dev/null 2>&1; then
+  alias grep="rg"
+else
+  alias grep='egrep --colour=auto'
+fi
+if command -v bat > /dev/null 2>&1; then
+  alias cat='bat'
+fi
+if command -v lazygit > /dev/null 2>&1; then
+  alias lg='lazygit'
+fi
+if command -v exa > /dev/null 2>&1; then
+  alias ls='exa --icons'
+  alias l='exa -al --icons'
+  alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
+  alias ll='exa -l --color=always --group-directories-first --icons'  # long format
+  alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
+fi
+if command -v lvim > /dev/null 2>&1; then
+  alias vim='lvim'
+fi
+#if command -v tmate > /dev/null 2>&1; then
+#  alias tmux='tmate -f ~/.tmux.conf'
+#fi
+if command -v grim > /dev/null 2>&1; then
+  alias scrot='grim "desktop-$(date +"%Y%m%d%H%M").png"'
+  alias sscrot='grim -g "$(slurp)" "desktop-$(date +"%Y%m%d%H%M").png"'
+elif command -v scrot > /dev/null 2>&1; then
+ alias scrot='scrot desktop-%Y%m%d%H%M.png -q 100 -cd 3'
+fi
+if [ "$IS_MAC" = 1 ]; then
+  alias xclip='pbcopy'
+  alias ding='osascript -e 'display notification "command done"''
+else
+  if command -v wl-copy > /dev/null 2>&1; then
+    alias xclip='tee >(wl-copy) | wl-copy -p'
+  fi
+  alias ding='notify-send "command done"'
+fi
+
+if [ $UID -ne 0 ]; then
+    alias reboot="sudo reboot"
+fi
+
+# Easy extract
+extract () {
+  if [ -f $1 ] ; then
+      case $1 in
+            *.tar.bz2)      tar xvjf $1   ;;
+            *.tar.gz)       tar xvzf $1   ;;
+        *.tar.xz)       tar xvJf $1   ;;
+            *.bz2)          bunzip2 $1    ;;
+            *.rar)          unrar x $1    ;;
+            *.gz)           gunzip $1     ;;
+            *.tar)          tar xvf $1    ;;
+            *.tbz2)         tar xvjf $1   ;;
+            *.tgz)          tar xvzf $1   ;;
+        *.txz)          tar xvJf $1   ;;
+            *.rar)          unrar $1      ;;
+            *.zip)          unzip $1      ;;
+            *.Z)            uncompress $1 ;;
+            *.7z)           7z x $1       ;;
+          *)           echo "don't know how to extract '$1'..." ;;
+      esac
+  else
+      echo "'$1' is not a valid file!"
+  fi
+}
+
+# Makes directory then moves into it
+function mkcdr {
+    mkdir -p -v $1
+    cd $1
+}
+
+function pyproj {
+  poetry new $1
+  mkdir $1/tests/unit $1/tests/func
+  touch $1/tests/unit/__init__.py $1/tests/func/__init__.py $1/tests/conftest.py
+  cp ~/.dotfiles/scripts/.scripts/tox/basic.ini $1/tox.ini
+  cd $1
+  command sed -i '/^pytest/a tox = "^3.20.1"' pyproject.toml
+  git init
+  cp ~/.dotfiles/scripts/.scripts/pre-commit/pydefault/.pre-commit-config.yaml .
+  pre-commit install
+}
+
+# Creates an archive from given directory
+mktar()  { tar cvf  "${1%%/}.tar"     "${1%%/}/"; }
+mktgz()  { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
+mktbz()  { tar cvjf "${1%%/}.tar.bz2" "${1%%/}/"; }
+mkzip()  { 7z a -r  "${1%%/}.zip"     "${1%%/}/"; }
+mk7zip() { 7z a -r  "${1%%/}.7z"      "${1%%/}/"; }
+
+function cl() {
+    DIR="$*";
+        # if no DIR given, go home
+        if [ $# -lt 1 ]; then
+                DIR=$HOME;
+    fi;
+    builtin cd "${DIR}" && \
+    # will use exa if aliased above
+        ls
+}
+
+#function sshf(){
+#    sed -i "$!d" ~/.ssh/known_hosts
+#}
+encrypt () {
+        output=~/"${1}".$(date +%s).enc
+        gpg --encrypt --armor --output ${output} -r 0x0000 -r 0x0001 -r 0x0002 "${1}" && echo "${1} -> ${output}"
+}
+
+decrypt () {
+        output=$(echo "${1}" | rev | cut -c16- | rev)
+        gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
+}

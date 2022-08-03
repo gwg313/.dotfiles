@@ -61,6 +61,7 @@ alias nd="nordvpn disconnect"
 alias tra="transmission-remote -a"
 alias vda="for i in `vagrant global-status | grep virtualbox | awk '{ print $1 }'` ; do vagrant destroy $i ; done"
 alias clock="sudo ntpd -gq"
+alias octal="stat -c '%a %n'"
 # Some useful nmap aliases for scan modes
 
 # Nmap options are:

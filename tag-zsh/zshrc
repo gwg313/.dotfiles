@@ -36,7 +36,7 @@ else
       #command cat ${XDG_CONFIG_HOME}/wpg/sequences
     fi
     if [ -f ~/.cache/wal/sequences ]; then
-      #command cat ${HOME}/.cache/wal/sequences
+      command cat ${HOME}/.cache/wal/sequences
     fi
 fi
 

@@ -121,6 +121,7 @@ if [ "${IS_ARCH}" = "1" ]; then
   alias etc-update="sudo pacdiff"
   alias asdep="sudo pacman -D --asdeps"
   alias explicit="sudo pacman -D --asexplicit"
+  alias keyring="sudo pacman -S archlinux-keyring"
 
 elif [ "${IS_DEBIAN}" = "1" ]; then
   ## Package Manager - apt

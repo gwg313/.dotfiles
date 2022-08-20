@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: Gtest Fixture Test
-# key: ft
-# --
-
-TEST_F(${1:Fixture}, ${2:Name}) {
-$0
-}

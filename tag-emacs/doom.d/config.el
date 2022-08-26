@@ -30,6 +30,8 @@
 (setq doom-fallback-buffer-name "► Doom"
       +doom-dashboard-name "► Doom")
 
+(setq which-key-idle-delay 0.5)
+
 (setq which-key-allow-multiple-replacements t)
 (after! which-key
   (pushnew!
@@ -77,3 +79,7 @@
 (setq display-line-numbers-type 'relative)
 
 (setq org-directory "~/org/")
+
+(setq treemacs-width 20)
+(setq treemacs--width-is-locked nil)
+(setq treemacs-width-is-initially-locked nil)

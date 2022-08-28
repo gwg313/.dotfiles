@@ -83,3 +83,9 @@
 (setq treemacs-width 20)
 (setq treemacs--width-is-locked nil)
 (setq treemacs-width-is-initially-locked nil)
+
+
+(after! avy
+  ;; home row priorities: 8 6 4 5 - - 1 2 3 7
+  (setq avy-keys '(?w ?e ?a ?k ?n ?s ?h ?g))
+  (setq avy-all-windows t))

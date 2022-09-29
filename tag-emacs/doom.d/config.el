@@ -62,7 +62,7 @@
 
 
 (if (eq system-type 'darwin)
-(setq doom-font (font-spec :family "FiraMono Nerd Font Mono" :size 24)
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 24)
       doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 36)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 24)
       doom-unicode-font (font-spec :family "JuliaMono")

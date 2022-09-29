@@ -2,9 +2,7 @@
 
     sudo yabai --load-sa
     yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
-    SPACEBAR_HEIGHT=$(spacebar -m config height)
-    yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
+    yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 
     #source ~/.cache/wal/colors.sh # pywal scheme - update if needed
 
@@ -18,6 +16,7 @@
 
 
     # Configure borders
+    yabai -m config external_bar                 all:49:0
     yabai -m config window_border                on
     yabai -m config window_border_width          2
     yabai -m config active_window_border_color   0xff$CACTV
@@ -25,15 +24,15 @@
     yabai -m config insert_window_border_color   0xff$CINSE
     
     # global settings
-    yabai -m config mouse_follows_focus          on
-    yabai -m config focus_follows_mouse          autoraise
+    yabai -m config mouse_follows_focus          off
+    yabai -m config focus_follows_mouse          off
     yabai -m config window_placement             second_child
-    yabai -m config window_topmost               on
-    yabai -m config window_shadow                on
-    yabai -m config window_opacity               off
-    yabai -m config window_opacity_duration      0.0
+    yabai -m config window_topmost               off
+    yabai -m config window_shadow                float
+    yabai -m config window_opacity               on
+    yabai -m config window_opacity_duration      0.15
     yabai -m config active_window_opacity        1.0
-    yabai -m config normal_window_opacity        0.90
+    yabai -m config normal_window_opacity        0.95
     yabai -m config split_ratio                  0.50
     yabai -m config auto_balance                 off
     yabai -m config mouse_modifier               ctrl
@@ -49,13 +48,23 @@
     yabai -m config right_padding                20
     yabai -m config window_gap                   20
 
-    # mission-control desktop labels
-    yabai -m space 1 --label main
-    yabai -m space 2 --label secondary
-    yabai -m space 3 --label random
-    yabai -m space 4 --label extra
+    # space labels
+    yabai -m space 1 --label code
+    yabai -m space 2 --label tex
+    yabai -m space 3 --label web
+    yabai -m space 4 --label idle
+    yabai -m space 5 --label misc
+    yabai -m space 6 --label doc
+    yabai -m space 7 --label help
+    yabai -m space 8 --label music
+
+
 
     # ===== Rules ==================================
+
+     # Do not manage some apps which are not resizable
+     yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Preferences|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice)$" manage=off
+
     yabai -m rule --add app="^Firefox$" title="^Opening .*$" manage=off  
 
     yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off

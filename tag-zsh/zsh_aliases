@@ -240,8 +240,17 @@ fi
 if command -v bat > /dev/null 2>&1; then
   alias cat='bat'
 fi
+if command -v batcat > /dev/null 2>&1; then
+  alias cat='batcat'
+fi
 if command -v lazygit > /dev/null 2>&1; then
-  alias lg='lazygit'
+  alias lzg='lazygit'
+fi
+if command -v lazydocker > /dev/null 2>&1; then
+  alias lzd='lazydocker'
+fi
+if command -v poetry > /dev/null 2>&1; then
+  alias psource='source $(poetry env info --path)/bin/activate'
 fi
 if command -v exa > /dev/null 2>&1; then
   alias ls='exa --icons'
@@ -317,6 +326,19 @@ function pyproj {
   git init
   cp ~/.dotfiles/scripts/.scripts/pre-commit/pydefault/.pre-commit-config.yaml .
   pre-commit install
+}
+
+function fapipackage {
+  mkdir $1
+  touch $1/router.py
+  touch $1/schemas.py
+  touch $1/models.py
+  touch $1/service.py
+  touch $1/dependencies.py
+  touch $1/constants.py
+  touch $1/config.py
+  touch $1/utils.py
+  touch $1/exceptions.py
 }
 
 # Creates an archive from given directory

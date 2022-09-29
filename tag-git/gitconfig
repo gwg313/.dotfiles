@@ -6,4 +6,4 @@
 	excudesfile = ~/.gitignore_global
 [commit]
 	template = /home/glen/.gittemplate
-  gpgsign = true
+#  gpgsign = true

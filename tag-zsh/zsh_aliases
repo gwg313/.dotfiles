@@ -339,6 +339,7 @@ function fapipackage {
   touch $1/config.py
   touch $1/utils.py
   touch $1/exceptions.py
+  touch $1/__init__.py
 }
 
 # Creates an archive from given directory

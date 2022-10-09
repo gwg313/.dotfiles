@@ -11,7 +11,9 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "sonokai"
+vim.cmd("let g:sonokai_style = 'andromeda'")
+vim.cmd("let g:sonokai_enable_italic_comment = 1")
 vim.opt.relativenumber = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -47,25 +49,32 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.dap.active = true
+lvim.builtin.gitsigns.active = true
+lvim.builtin.autopairs.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.treesitter.rainbow.enable = true -- Enable Rainbow Plugin
+lvim.builtin.fancy_diff = true
+lvim.builtin.test_runner = { active = true, runner = "neotest" }
+lvim.builtin.motion_provider = "lightspeed"
+
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
@@ -161,23 +170,23 @@ linters.setup {
   },
 }
 
--- Additional Plugins
-lvim.plugins = {
-  {
-    "ggandor/lightspeed.nvim",
-    event = "BufRead",
-  },
-  {
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-  },
-  {
-    "p00f/nvim-ts-rainbow",
-  },
+-- -- Additional Plugins
+-- lvim.plugins = {
+--   {
+--     "ggandor/lightspeed.nvim",
+--     event = "BufRead",
+--   }, {
+--     "windwp/nvim-ts-autotag",
+--     config = function()
+--       require("nvim-ts-autotag").setup()
+--     end,
+--   },
+--   {
+--     "p00f/nvim-ts-rainbow",
+--   },
+--   { "rafi/awesome-vim-colorschemes" },
 
-}
+-- }
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   pattern = { "*.json", "*.jsonc" },
@@ -191,3 +200,10 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+-- Additional Plugins
+-- =========================================
+require("user.plugins")
+
+-- Additional Keybindings
+-- =========================================
+require("user.keybindings")

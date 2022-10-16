@@ -27,4 +27,19 @@ lvim.plugins = {
     "p00f/nvim-ts-rainbow",
   },
   { "rafi/awesome-vim-colorschemes" },
+  {
+    "nvim-neotest/neotest",
+    config = function()
+      require("user.ntest").config()
+    end,
+    requires = {
+      { "nvim-neotest/neotest-go" },
+      { "nvim-neotest/neotest-python" },
+      { "nvim-neotest/neotest-plenary" },
+      { "rouge8/neotest-rust" },
+    },
+    -- opt = true,
+    -- event = { "BufEnter *_test.*,*_spec.*,test_*.*" },
+    disable = not (lvim.builtin.test_runner.active and lvim.builtin.test_runner.runner == "neotest"),
+  },
 }

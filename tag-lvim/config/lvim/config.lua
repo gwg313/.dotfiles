@@ -48,9 +48,9 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- }
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["T"] = {
+  name = "飯Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
@@ -201,6 +201,28 @@ linters.setup {
 --   end,
 -- })
 -- Additional Plugins
+lvim.builtin.which_key.mappings["t"] = {
+  name = "ﭧ Test",
+  f = {
+    "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), env=require('user.ntest').get_env()})<cr>",
+    "File",
+  },
+  o = { "<cmd>lua require('neotest').output.open({ enter = true, short = false })<cr>", "Output" },
+  r = { "<cmd>lua require('neotest').run.run({env=require('user.ntest').get_env()})<cr>", "Run" },
+  a = { "<cmd>lua require('user.ntest').run_all()<cr>", "Run All" },
+  c = { "<cmd>lua require('user.ntest').cancel()<cr>", "Cancel" },
+  R = { "<cmd>lua require('user.ntest').run_file_sync()<cr>", "Run Async" },
+  s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
+  n = { "<cmd>lua require('neotest').jump.next({ status = 'failed' })<cr>", "jump to next failed" },
+  p = { "<cmd>lua require('neotest').jump.prev({ status = 'failed' })<cr>", "jump to previous failed" },
+  d = { "<cmd>lua require('neotest').run.run({ strategy = 'dap' })<cr>", "Dap Run" },
+  x = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
+  w = { "<cmd>lua require('neotest').watch.watch()<cr>", "Watch" },
+}
+
+lvim.builtin.which_key.mappings.g.name = " Git"
+lvim.builtin.which_key.mappings.l.name = " LSP"
+
 -- =========================================
 require("user.plugins")
 

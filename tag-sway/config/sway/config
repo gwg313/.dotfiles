@@ -15,7 +15,6 @@ focus_follows_mouse always
 gaps outer 16
 gaps inner 16
 
-exec ~/.azotebg
 
 # Set laptop mode
 set $laptop eDP-1
@@ -56,7 +55,7 @@ input "1386:21012:Wacom_HID_5214_Pen" map_to_output eDP-1
     bindsym XF86AudioMute exec ponymix toggle
 
     # start a terminal
-    bindsym $mod+Return exec kitty
+    bindsym $mod+Return exec $term
 
     # kill focused window
     bindsym $mod+q kill
@@ -189,8 +188,8 @@ bar {
     swaybar_command waybar
 }
 
-default_border pixel 2
-
+default_border pixel 3
+client.focused "#9f1209" "#9f1209" "#ffffff" "#9f1209"
 include /etc/sway/config.d/
 
 #set $gnome-schema org.gnome.desktop.interface
@@ -219,4 +218,5 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec autocutsel -selection PRIMARY -fork
 exec autocutsel -selection CLIPBOARD -fork
 exec alacritty --class=terminal_scratchpad
+exec ~/.azotebg
 #exec --no-startup-id redshift -l 45.42:75.69 -m wayland

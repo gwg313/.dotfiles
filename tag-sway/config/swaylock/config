@@ -1,6 +1,6 @@
 ignore-empty-password
 disable-caps-lock-text
-image=/home/glen/Pictures/tennis.jpg
+image=/home/glen/Pictures/anime_girl.jpg
 font=FiraCode Nerd Font
 
 text-ver-color=00000000
@@ -32,5 +32,5 @@ datestr=%A, %d %B
 indicator-x-position=500
 indicator-y-position=875
 indicator-radius=450
-font-size=200
+font-size=75
 text-color=080808

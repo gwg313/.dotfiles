@@ -1,1 +1,0 @@
-/Users/glen/.dotfiles/config/lvim/config.lua

@@ -12,6 +12,32 @@
   # available, otherwise `xterm-256color` is used.
   #TERM: xterm-256color
 
+colors:
+  primary:
+    background: "0x2b2d3a"
+    foreground: "0xe1e3e4"
+
+  normal:
+    black: "0x181a1c"
+    red: "0xfb617e"
+    green: "0x9ed06c"
+    yellow: "0xedc763"
+    blue: "0x6dcae8"
+    magenta: "0xbb97ee"
+    cyan: "0xf89860"
+    white: "0xe1e3e4"
+
+  bright:
+    black: "0x7e8294"
+    red: "0xfb617e"
+    green: "0x9ed06c"
+    yellow: "0xedc763"
+    blue: "0x6dcae8"
+    magenta: "0xbb97ee"
+    cyan: "0xf89860"
+    white: "0xe1e3e4"
+
+
 window:
   # Window dimensions (changes require restart)
   #
@@ -21,7 +47,7 @@ window:
     columns: 0
     lines: 0
 
-  opacity: 0.9
+  opacity: 1.0
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is scaled
@@ -31,7 +57,7 @@ window:
     y: 2
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -76,7 +102,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) monospace
     #   - (Windows) Consolas
-    family: Ubuntu Mono
+    family: TerminessTTF Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -131,9 +157,6 @@ font:
   # following command:
   #   `defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`
   #
-  # This is a global setting and will require a log out or restart to take
-  # effect.
-  use_thin_strokes: true
 
 # Display the time it takes to redraw each frame.
 #render_timer: false

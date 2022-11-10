@@ -1,95 +1,215 @@
 {
-    "position": "top", 
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["custom/spotify"],
-    "modules-right": ["network#2", "custom/vpn", "pulseaudio", "battery", "clock"],
-    // Modules configuration
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"all-outputs": true,
-		"format": "{icon}",
-	 	"persistent_workspaces": {
-	 		"1": [],
-	 		"2": [],
-	 		"3": [],
-	 		"4": [],
-	 		"5": [],
-	 		"6": [],
-	 		"7": [],
-	 		"8": [],
-	 		"9": [],
-	 		"10": []
-	},
-        "format-icons": {
-            "default": "",
-            "urgent": "",
-            "focused": "",
-         }
-     },
-    "custom/vpn": {
-    	"format": "{}",
-        "interval": 1,
-        "exec": "/home/loki/bin/waybar-vpn.sh"
+  // "layer": "top", // Waybar at top layer
+  // "position": "left", // Waybar position (top|bottom|left|right)
+  //"height": 5, // Waybar height (to be removed for auto height)
+  "gtk-layer-shell": false,
+  // "width": 1280, // Waybar width
+  // Choose the order of the modules
+  "modules-left": [
+    "custom/wmname",
+    "sway/workspaces",
+    "custom/spotify"
+  ],
+  //, "sway/mode", "custom/media"],
+  // "modules-center": ["custom/spotify"],
+  "modules-right": [
+    "cpu",
+    "custom/separator",
+    "custom/power",
+    "custom/separator",
+    "backlight",
+    "custom/separator",
+    "battery",
+    "custom/separator",
+    "temperature",
+    "custom/separator",
+    "pulseaudio",
+    "custom/separator",
+    "network",
+    // "custom/separator",
+    // "custom/waylandvsxorg",
+    "custom/separator",
+    "custom/pacman",
+    "custom/separator",
+    "clock",
+    "custom/separator",
+    "tray"
+  ],
+  // "custom/language",
+  // "custom/separator",
+  // Modules configuration
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}:{icon} ",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "custom/wmname": {
+    "format": "",
+    "tooltip": false,
+    "on-scroll-down": "/usr/local/bin/hyprctl dispatch workspace m+1",
+    "on-scroll-up": "/usr/local/bin/hyprctl dispatch workspace m-1"
+  },
+  "wlr/workspaces": {
+    "sort-by-name": true
+    // "on-click": "/usr/local/bin/hyprctl dispatch workspace 3"
+    // "sort-by-coordinates": true
+  },
+  "custom/language": {
+    "exec": "swaymsg --type get_inputs | grep \"xkb_active_layout_name\" | sed -u '1!d; s/^.*xkb_active_layout_name\": \"//; s/ (US)//; s/\",//' && swaymsg --type subscribe --monitor '[\"input\"]' | sed -u 's/^.*xkb_active_layout_name\": \"//; s/\",.*$//; s/ (US)//'"
+  },
+  "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "tray": {
+    "icon-size": 30,
+    "spacing": 6
+  },
+  "clock": {
+    // "timezone": "America/New_York",
+    // "format": " {time}", 
+    "format": "{:%H:%M %a %Y-%m-%d}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%H:%M:%S}",
+    "interval": 1
+  },
+  "cpu": {
+    "format": "🖥&#8239;{usage}%",
+    "tooltip": false,
+    "on-click": "kitty procs --sortd cpu --watch-interval 2"
+  },
+  "memory": {
+    "format": " {}%"
+  },
+  "temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "format": "{icon}&#8239;{temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{icon}&#8239;{percent}%",
+    "format-icons": [
+      "💡",
+      "💡"
+    ]
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
     },
-    "custom/spotify": {
-    	"format": "<span foreground='#E5B4E2'> </span><span font='OperatorMonoSSm Nerd Font weight=325 Italic'>{}</span>",
-        "interval": 1,
-        "exec-if": "pgrep spotify",
-        "on-click": "playerctl -p spotify play-pause",
-        "on-scroll-up": "playerctl -p spotify previous",
-        "on-scroll-down": "playerctl -p spotify next",
-        "tooltip": false,
-        "escape": true,
-        "max-length": 60,
-        "exec": "/home/loki/bin/spotify.sh"
+    "format": "{icon}&#8239;{capacity}%",
+    "format-charging": "🗲&#8239;{capacity}%",
+    "format-plugged": "🗲&#8239;{capacity}%",
+    "format-alt": "{icon} {time}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    // "format-icons": ["", "", "", "", ""]
+  },
+  "battery#bat2": {
+    "bat": "BAT2"
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "📶&#8239;{essid} ({signalStrength}%)",
+    "format-ethernet": "&#8239;{ifname}: {ipaddr}/{cidr}",
+    "format-linked": "&#8239;{ifname} (No IP)",
+    "format-disconnected": "✈&#8239;Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{icon}&#8239;{volume}% {format_source}",
+    //"format-bluetooth": "{volume}% {icon} {format_source}",
+    //"format-bluetooth-muted": "🔈 {icon} {format_source}",
+    //"format-muted": "🔈&#8239;0% {format_source}",
+    // "format-source": "🔈&#8239;{volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "💡",
+      "hands-free": "🔈",
+      "headset": "🔈",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "🔈",
+        "🔈",
+        "🔈"
+      ]
     },
-	"clock": {
-		"format": "<span foreground='#C6AAE8'> </span>{:%a %d %H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-	},
-	"battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15,
-        	},
-		    "format": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {capacity}%",
-		    "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {capacity}%",
-		    "format-critical": "<span size='13000' foreground='#E38C8F'>{icon}</span> {capacity}%",
-		    "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-		    "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-		    "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon}</span> {time}",
-		    "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
-        	"format-icons": ["", "", "", "", ""],
-            "tooltip-format": "{time}"
-	},
-	"network": {
-        "format-wifi": "<span size='13000' foreground='#F2CECF'> </span>{essid}",
-        "format-ethernet": "<span size='13000' foreground='#F2CECF'>󰤭</span> Disconnected",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "<span size='13000' foreground='#F2CECF'> </span>Disconnected",
-		"tooltip-format-wifi": "Signal Strenght: {signalStrength}%",
-	},
-    "network#2": {
-	"interface": "wl*",
-        "interval": 2,
-        "format-ethernet": "Up: {bandwidthUpBits} Down: {bandwidthDownBits}  ",
-        "tooltip-format-ethernet": "{ifname}  ",
-        "format-wifi": "{essid} ({signalStrength}%)  ",
-        "tooltip-format-wifi": "{ifname} {essid} ({signalStrength}%) ",
-        "format-disconnected": "Disconnected ⚠"
+    "on-click": "pavucontrol"
+  },
+  "custom/power": {
+    "format": "⏻&#8239;{}W",
+    "exec": "$HOME/bin/power.sh",
+    "interval": 2
+  },
+  "custom/waylandvsxorg": {
+    "exec": "$HOME/bin/window_wayland_xorg.sh",
+    "interval": 2
+  },
+  "custom/pacman": {
+    "format": "pkgs:{}",
+    "exec": "$HOME/bin/updates-pacman-aurhelper.sh",
+    "interval": 600,
+    "on-click": "kitty paru -Syu --noconfirm --ignore=linux*"
+  },
+  "custom/spotify": {
+    "exec": "/usr/bin/python3 /home/frigaut/bin/mediaplayer.py --player spotify",
+    "format": "{}  ",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+  "custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜"
     },
-	"pulseaudio": {
-		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"format": "<span size='13000' foreground='#EBDDAA'>{icon}</span> {volume}%",
-        "format-muted": "<span size='14000' foreground='#EBDDAA'></span> Muted",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
-        },
-    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  }
 }

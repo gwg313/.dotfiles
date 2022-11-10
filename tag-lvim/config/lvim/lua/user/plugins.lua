@@ -17,6 +17,7 @@ lvim.plugins = {
 "MattesGroeger/vim-bookmarks",
 "NvChad/nvim-colorizer.lua",
 "folke/todo-comments.nvim",
+"monaqa/dial.nvim",
 { "zbirenbaum/copilot.lua",
   event = { "VimEnter" },
   config = function()

@@ -3,7 +3,7 @@ set $left Left
 set $down Down
 set $up Up
 set $right Right
-set $term alacritty
+set $term kitty
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #set $menu rofi -modi combi -show combi -combi-modi drun,run -font "Noto Sans 11" -bw 0 -separator-style solid
 #set $menu dmenu-wl_run -i

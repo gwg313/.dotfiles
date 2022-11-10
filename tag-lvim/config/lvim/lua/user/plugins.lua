@@ -1,45 +1,42 @@
+-- Additional Plugins
 lvim.plugins = {
-  "folke/trouble.nvim",
+"windwp/nvim-spectre",
+"rafi/awesome-vim-colorschemes",
+"kylechui/nvim-surround",
+"ggandor/leap.nvim",
+"karb94/neoscroll.nvim",
+"p00f/nvim-ts-rainbow",
+"folke/zen-mode.nvim",
+"mfussenegger/nvim-dap-python",
+"mxsdev/nvim-dap-vscode-js",
+"theprimeagen/harpoon",
+"nacro90/numb.nvim",
+"TimUntersberger/neogit",
+"sindrets/diffview.nvim",
+"windwp/nvim-ts-autotag",
+"MattesGroeger/vim-bookmarks",
+"NvChad/nvim-colorizer.lua",
+"folke/todo-comments.nvim",
+{ "zbirenbaum/copilot.lua",
+  event = { "VimEnter" },
   config = function()
-    require("trouble").setup {
-      auto_open = true,
-      auto_close = true,
-      padding = false,
-      height = 10,
-      use_diagnostic_signs = true,
-    }
+    vim.defer_fn(function()
+      require("copilot").setup {
+          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
+      }
+    end, 100)
   end,
-  cmd = "Trouble",
+},
+
+{ "zbirenbaum/copilot-cmp",
+  after = { "copilot.lua", "nvim-cmp" },
+},
   {
-    "ggandor/lightspeed.nvim",
+    "jinh0/eyeliner.nvim",
     config = function()
-      require("user.lightspeed").config()
+      require("eyeliner").setup {
+        highlight_on_key = true,
+      }
     end,
-    disable = lvim.builtin.motion_provider ~= "lightspeed",
-  },
-  {
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-  },
-  {
-    "p00f/nvim-ts-rainbow",
-  },
-  { "rafi/awesome-vim-colorschemes" },
-  {
-    "nvim-neotest/neotest",
-    config = function()
-      require("user.ntest").config()
-    end,
-    requires = {
-      { "nvim-neotest/neotest-go" },
-      { "nvim-neotest/neotest-python" },
-      { "nvim-neotest/neotest-plenary" },
-      { "rouge8/neotest-rust" },
-    },
-    -- opt = true,
-    -- event = { "BufEnter *_test.*,*_spec.*,test_*.*" },
-    disable = not (lvim.builtin.test_runner.active and lvim.builtin.test_runner.runner == "neotest"),
   },
 }

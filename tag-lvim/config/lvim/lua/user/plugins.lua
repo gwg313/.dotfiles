@@ -18,19 +18,15 @@ lvim.plugins = {
 "NvChad/nvim-colorizer.lua",
 "folke/todo-comments.nvim",
 "monaqa/dial.nvim",
-{ "zbirenbaum/copilot.lua",
-  event = { "VimEnter" },
-  config = function()
-    vim.defer_fn(function()
-      require("copilot").setup {
-          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
-      }
-    end, 100)
-  end,
-},
-
-{ "zbirenbaum/copilot-cmp",
-  after = { "copilot.lua", "nvim-cmp" },
+"f-person/git-blame.nvim",
+"ruifm/gitlinker.nvim",
+"mattn/vim-gist",
+"wakatime/vim-wakatime",
+{
+  "tzachar/cmp-tabnine",
+  run = "./install.sh",
+  requires = "hrsh7th/nvim-cmp",
+  event = "InsertEnter",
 },
   {
     "jinh0/eyeliner.nvim",

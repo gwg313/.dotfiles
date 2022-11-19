@@ -19,7 +19,7 @@ require("typescript").setup {
 -- Set a formatter.
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "prettier", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } },
+  { command = "prettier", filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "vue" } },
 }
 
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
@@ -30,7 +30,7 @@ require("dap-vscode-js").setup {
   adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
 }
 
-for _, language in ipairs { "typescript", "javascript" } do
+for _, language in ipairs { "typescript", "javascript", "vue" } do
   require("dap").configurations[language] = {
     {
       type = "pwa-node",

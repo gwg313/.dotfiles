@@ -1,18 +1,18 @@
-reload "user.plugins"
-reload "user.options"
-reload "user.keymaps"
-reload "user.lsp"
-reload "user.todo-comments"
-reload "user.surround"
-reload "user.spectre"
-reload "user.harpoon"
-reload "user.whichkey"
-reload "user.neoscroll"
-reload "user.neogit"
-reload "user.numb"
-reload "user.bookmark"
-reload "user.colorizer"
-reload "user.icons"
-reload "user.dial"
-reload "user.git"
-reload "user.tabnine"
+reload("user.plugins")
+reload("user.options")
+reload("user.keymaps")
+reload("user.lsp")
+reload("user.harpoon")
+reload("user.surround")
+reload("user.bookmark")
+require("todo-comments").setup()
+reload("user.spectre")
+reload("user.git")
+reload("user.whichkey")
+reload("user.neoscroll")
+reload("user.neogit")
+reload("user.numb")
+reload("user.colorizer")
+reload("user.dial")
+reload("user.icons")
+-- reload "user.inlay-hints"

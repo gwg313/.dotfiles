@@ -6,6 +6,8 @@ lvim.plugins = {
   "ggandor/leap.nvim",
   "karb94/neoscroll.nvim",
   "p00f/nvim-ts-rainbow",
+  "windwp/nvim-ts-autotag",
+  "jose-elias-alvarez/typescript.nvim",
   "folke/zen-mode.nvim",
   "mfussenegger/nvim-dap-python",
   "mxsdev/nvim-dap-vscode-js",
@@ -13,7 +15,6 @@ lvim.plugins = {
   "nacro90/numb.nvim",
   "TimUntersberger/neogit",
   "sindrets/diffview.nvim",
-  "windwp/nvim-ts-autotag",
   "MattesGroeger/vim-bookmarks",
   "NvChad/nvim-colorizer.lua",
   "folke/todo-comments.nvim",
@@ -21,6 +22,11 @@ lvim.plugins = {
   "f-person/git-blame.nvim",
   "ruifm/gitlinker.nvim",
   "mattn/vim-gist",
+  "lvimuser/lsp-inlayhints.nvim",
+  {
+    "folke/trouble.nvim",
+      cmd = "TroubleToggle",
+  },
   "wakatime/vim-wakatime",
   {
     "tzachar/cmp-tabnine",
@@ -46,7 +52,7 @@ lvim.plugins = {
     "jinh0/eyeliner.nvim",
     config = function()
       require("eyeliner").setup {
-        highlight_on_key = true,
+        highlight_on_key = false,
       }
     end,
   },

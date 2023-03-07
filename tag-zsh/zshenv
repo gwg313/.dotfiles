@@ -48,4 +48,5 @@ export PAGER=less
 export PYTHONBREAKPOINT=ipdb.set_trace
 
 export _JAVA_AWT_WM_NONREPARENTING=1
-. "$HOME/.cargo/env"
+
+export TMOUT=0

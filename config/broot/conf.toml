@@ -9,8 +9,7 @@
 #  execution = "/usr/bin/nvim {file}"
 [[verbs]]
 invocation = "edit"
-key = "enter"
-shortcut = "e"
+key = "e"
 execution = "$EDITOR {file}"
 
 [[verbs]]
@@ -35,7 +34,7 @@ execution = "$PAGER {file}"
 [[verbs]]
 name = "open-code"
 key = "enter"
-extensions = ["rs", "js", "ts", "py", "toml"]
+extensions = ["rs", "js", "ts", "py", "toml", "md"]
 execution = "$EDITOR +{line} {file}"
 working_dir = "{root}"
 leave_broot = false

@@ -204,7 +204,7 @@ for_window [class="Deadbeef" title="Search"] floating enable
 #
 # Auto launch
 #
-
+exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 exec mako
 #exec pulseaudio --daemonize --high-priority --realtime

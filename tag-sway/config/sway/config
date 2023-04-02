@@ -3,12 +3,26 @@ set $left Left
 set $down Down
 set $up Up
 set $right Right
-set $term kitty
+# set $term flatpak run org.wezfurlong.wezterm
+set $term foot
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #set $menu rofi -modi combi -show combi -combi-modi drun,run -font "Noto Sans 11" -bw 0 -separator-style solid
-#set $menu dmenu-wl_run -i
+
+output * background ~/.wallpapers/forest.jpg fill
+
+set $rofi_cmd rofi \
+        -run-command 'swaymsg exec -- {cmd}' \
+        -run-shell-command 'swaymsg exec -- {terminal} -e {cmd}' \
+        -terminal '$term'
+# Shows a combined list of the applications with desktop files and
+# executables from PATH.
+# TODO: add window with the next release of rofi-wayland
+set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+
+
+# set $menu dmenu-wl_run -i
 #set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf "#dcdccc" --fn "pango:DejaVu Sans Mono 12"' --term='alacritty'
-set $menu j4-dmenu-desktop --dmenu='wofi -d  -l /usr/bin -Imi'
+# set $menu j4-dmenu-desktop --dmenu='wofi -d  -l /usr/bin -Imi'
 
 focus_follows_mouse always
 
@@ -50,7 +64,7 @@ input "1386:21012:Wacom_HID_5214_Pen" map_to_output eDP-1
     bindsym --locked XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
     bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
 
-    bindsym XF86AudioRaiseVolume exec ponymix inc 2
+    bindsym --locked XF86AudioRaiseVolume exec ponymix inc 2
     bindsym XF86AudioLowerVolume exec ponymix dec 2
     bindsym XF86AudioMute exec ponymix toggle
 
@@ -205,13 +219,13 @@ for_window [class="Deadbeef" title="Search"] floating enable
 # Auto launch
 #
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r
-exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+# exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus # fucks up podman in silverblue
 exec mako
 #exec pulseaudio --daemonize --high-priority --realtime
 #exec pulseaudio --daemonize
-exec --no-startup-id pipewire
-exec --no-startup-id pipewire-media-session
-exec --no-startup-id pipewire-pulse
+# exec --no-startup-id pipewire
+# exec --no-startup-id pipewire-media-session
+# exec --no-startup-id pipewire-pulse
 exec ~/.scripts/wallpaper_update.sh
 exec fcitx
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

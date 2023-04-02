@@ -1,8 +1,6 @@
 #!/bin/zsh
 
-if command -v lvim > /dev/null 2>&1; then
-	export EDITOR=lvim
-elif command -v nvim > /dev/null 2>&1; then
+if command -v nvim > /dev/null 2>&1; then
 	export EDITOR=nvim
 elif command -v vim > /dev/null 2>&1; then
 	export EDITOR=vim
@@ -40,8 +38,7 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 	export XDG_CURRENT_DESKTOP=sway
 fi
 
-export PMM_WORLD="~/.config/worldedit/$(hostname)"
-export HOMEBREW_BREWFILE="~/.config/worldedit/$(hostname)"
+# export HOMEBREW_BREWFILE="~/.config/worldedit/$(hostname)"
 
 export SSH_AUTH_SOCK
 export PAGER=less
@@ -50,3 +47,5 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export TMOUT=0
+
+export GRAVEYARD=~/.local/share/Trash

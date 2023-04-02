@@ -1,6 +1,6 @@
 # t print a new line at the start of the prompt
 [line_break]
-disabled = true
+disabled = false
 
 [character]
 success_symbol = "[➜](bold green) "
@@ -11,7 +11,7 @@ error_symbol = "[✗](bold red) "
 disabled = true
 
 [time]
-disabled = false
+disabled = true
 format = '🕙[\[ $time \]]($style) '
 time_format = "%T"
 utc_time_offset = "-4"

@@ -14,34 +14,34 @@
 @define-color accent6 #ebbcba;
 
 /* DRACULA */
-@define-color accent1 #ff5555;
-@define-color accent2 #50fa7b;
-@define-color accent3 #f1fa8c;
-@define-color accent4 #bd93f9;
-@define-color accent5 #ff79c6;
-@define-color accent6 #8be9fd;
+/* @define-color accent1 #ff5555; */
+/* @define-color accent2 #50fa7b; */
+/* @define-color accent3 #f1fa8c; */
+/* @define-color accent4 #bd93f9; */
+/* @define-color accent5 #ff79c6; */
+/* @define-color accent6 #8be9fd; */
 
 /* MONOKAI PRO */
-@define-color accent1 #ff6188;
-@define-color accent2 #a9dc76;
-@define-color accent3 #ffd866;
-@define-color accent4 #fc9867;
-@define-color accent5 #ab9df2;
-@define-color accent6 #78dce8;
+/* @define-color accent1 #ff6188; */
+/* @define-color accent2 #a9dc76; */
+/* @define-color accent3 #ffd866; */
+/* @define-color accent4 #fc9867; */
+/* @define-color accent5 #ab9df2; */
+/* @define-color accent6 #78dce8; */
 
 /* TOKYO NIGHT */
-@define-color accent1 #ff7a93;
-@define-color accent2 #b9f27c;
-@define-color accent3 #ff9e64;
-@define-color accent4 #bb9af7;
-@define-color accent5 #7da6ff;
-@define-color accent6 #0db9d7;
+/* @define-color accent1 #ff7a93; */
+/* @define-color accent2 #b9f27c; */
+/* @define-color accent3 #ff9e64; */
+/* @define-color accent4 #bb9af7; */
+/* @define-color accent5 #7da6ff; */
+/* @define-color accent6 #0db9d7; */
 
 * {
     border: none;
     border-radius: 6px;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "TerminessTTF Nerd Font Mono", "Roboto Mono Medium", Helvetica, Arial, sans-serif;
+    font-family: "Operator Mono Lig", "Roboto Mono Medium", Helvetica, Arial, sans-serif;
     /* Recommended font sizes: 720p: ~14px, 1080p: ~18px */
     font-size: 22px;
     min-height: 0;

@@ -4,7 +4,8 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
-
+# set -g status off
+bind-key a set status
 # -- navigation ----------------------------------------------------------------
 
 # if you're running tmux within iTerm2

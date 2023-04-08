@@ -3,9 +3,10 @@
 #fi
 # # Turn off all beeps
 unsetopt BEEP
-
-source $HOME/.nix-profile/etc/profile.d/nix.sh
-export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+if [ -f "/proc/self/cgroup" ] && grep -q "^0::/user.slice" /proc/self/cgroup; then
+  source $HOME/.nix-profile/etc/profile.d/nix.sh
+  export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+fi
 
 # Plugins
 source ~/.zplug/init.zsh
@@ -100,7 +101,7 @@ source $HOME/.keychain/$HOST-sh
 
 
 if command -v neofetch > /dev/null 2>&1; then
-  clear 
+  # clear 
   neofetch
 else
   echo 'Install Neofetch'

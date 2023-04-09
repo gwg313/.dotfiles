@@ -1,1 +1,7 @@
 set -Ux EDITOR nvim
+
+# Nix setup
+if test -f "/proc/self/cgroup" && grep -s "^0::/user.slice" /proc/self/cgroup > /dev/null
+  # Source Nix setup script
+  fenv source ~/.nix-profile/etc/profile.d/nix.sh
+end

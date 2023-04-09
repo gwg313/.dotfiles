@@ -1,0 +1,106 @@
+# Default flags
+alias rm='rm -i'
+alias chmod="chmod -R"
+alias cp='cp -R -i -v'
+alias mv='mv -i -v'
+alias mkdir='mkdir -p -v'
+alias df='df -h'
+alias du='du -h -s'
+alias dd='dd status=progress bs=4M conv=fdatasync '
+alias wgetpaste='wgetpaste -Xx'
+alias sudo='sudo '  # Makes sudo work with aliases
+# alias ssh='TERM=xterm ssh'  # Fixes some issues with ssh on some terminals
+alias wget="wget -c"
+alias ping="ping -c 5"
+
+# Shortcuts to edit common files
+alias reload='source ~/.zshrc'
+alias zshrc="$EDITOR ~/.zshrc"
+alias zshenv="$EDITOR ~/.zshenv"
+alias zshaliases="$EDITOR ~/.zsh_aliases"
+alias keybinds="$EDITOR ~/.keybinds"
+
+# Changing dirs with just dots.
+alias .='cd ../'
+alias ..='cd ../../'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+
+# Misc alieses I use often
+alias tcn='mv --force -t ~/.local/share/Trash '
+alias ports='netstat -tulanp'
+alias rmd='"rm" -rf'
+alias mine="sudo chown -R $(whoami):users"
+alias benchmark='hyperfine --warmup 3 '
+alias c="clear"
+alias trash="mv --force -t ~/.local/share/Trash"
+alias dtrash="find ~/.local/share/Trash -type f -exec rm {} \;"
+alias listen="lsof -P -i -n" 
+alias nc="nordvpn connect sweden"
+alias nd="nordvpn disconnect"
+alias tra="transmission-remote -a"
+# alias vda="for i in `vagrant global-status | grep virtualbox | awk '{ print $1 }'` ; do vagrant destroy $i ; done"
+alias clock="sudo ntpd -gq"
+alias octal="stat -c '%a %n'"
+
+if type -q nvim
+  alias vim="nvim"
+end
+
+if type -q exa
+  alias ls='exa --icons'
+  alias l='exa -al --icons'
+  alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
+  alias ll='exa -l --color=always --group-directories-first --icons'  # long format
+  alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
+end
+
+if type -q tmux
+  alias ta="tmux attach -t"
+  alias tad="tmux attach -d -t"
+  alias ts="tmux new-session -s"
+  alias tl="tmux list-sessions"
+  alias tksv="tmux kill-server"
+  alias tkss="tmux kill-session -t"
+end
+
+if type -q zi
+  alias cd="z"
+  alias ci="zi"
+end
+
+if type -q procs
+  alias ps="procs"
+end
+
+if type -q hyperfine
+  alias timeit="hyperfine "
+end
+
+if type -q dust
+  alias du="dust"
+end
+
+if type -q fd
+  alias find="fd"
+end
+
+if type -q colordiff
+  alias diff="colordiff -Nuar"
+else
+  alias diff="diff -Nuar"
+end
+
+if type -q lf
+  alias ranger="lf"
+end
+
+if type -q rg
+  alias grep="rg"
+else
+  alias grep='egrep --colour=auto'
+end
+
+if type -q bat
+  alias cat='bat --style=plain'
+end

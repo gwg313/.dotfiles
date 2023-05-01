@@ -1,4 +1,5 @@
-set -Ux EDITOR nvim
+set -gx EDITOR nvim
+set -gx HOSTNAME Romdeau
 
 # Nix setup
 if test -f "/proc/self/cgroup" && grep -s "^0::/user.slice" /proc/self/cgroup > /dev/null

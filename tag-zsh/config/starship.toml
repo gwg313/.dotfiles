@@ -87,3 +87,7 @@ ssh_only = false
 format =  "on [$hostname](bold red) "
 trim_at = ".companyname.com"
 disabled = true
+
+[kubernetes]
+format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+disabled = false

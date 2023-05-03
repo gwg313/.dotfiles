@@ -9,33 +9,33 @@ if [ -f "/proc/self/cgroup" ] && grep -q "^0::/user.slice" /proc/self/cgroup; th
   export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
 fi
 
-# Plugins
-source ~/.zplug/init.zsh
-
-# zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-completions"
-zplug "MichaelAquilina/zsh-you-should-use"
-
-zplug "plugins/sprunge",   		from:oh-my-zsh
-zplug "plugins/colored-man-pages",	from:oh-my-zsh
-zplug "plugins/colored-man-pages",	from:oh-my-zsh
-zplug "plugins/docker",   		from:oh-my-zsh
-zplug "plugins/docker-compose",		from:oh-my-zsh
-zplug "plugins/kubectl",		from:oh-my-zsh
-zplug "plugins/fzf", 			from:oh-my-zsh
-zplug "plugins/nmap", 			from:oh-my-zsh
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-zplug load --verbose
+# # Plugins
+# source ~/.zplug/init.zsh
+#
+# # zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+# zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-syntax-highlighting"
+# zplug "zsh-users/zsh-completions"
+# zplug "MichaelAquilina/zsh-you-should-use"
+#
+# zplug "plugins/sprunge",   		from:oh-my-zsh
+# zplug "plugins/colored-man-pages",	from:oh-my-zsh
+# zplug "plugins/colored-man-pages",	from:oh-my-zsh
+# zplug "plugins/docker",   		from:oh-my-zsh
+# zplug "plugins/docker-compose",		from:oh-my-zsh
+# zplug "plugins/kubectl",		from:oh-my-zsh
+# zplug "plugins/fzf", 			from:oh-my-zsh
+# zplug "plugins/nmap", 			from:oh-my-zsh
+#
+# # Install plugins if there are plugins that have not been installed
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
+#
+# zplug load --verbose
 
 # History
 HISTSIZE=5000               #How many lines of history to keep in memory

@@ -44,8 +44,8 @@ alias tra="transmission-remote -a"
 alias clock="sudo ntpd -gq"
 alias octal="stat -c '%a %n'"
 
-if type -q nvim
-  alias vim="nvim"
+if type -q lvim
+  alias vim="lvim"
 end
 
 if type -q exa

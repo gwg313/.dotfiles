@@ -89,5 +89,5 @@ trim_at = ".companyname.com"
 disabled = true
 
 [kubernetes]
-format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+format = 'on [⛵ $context ](dimmed green) '
 disabled = false

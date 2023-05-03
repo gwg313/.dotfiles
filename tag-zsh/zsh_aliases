@@ -294,6 +294,11 @@ else
   alias ding='notify-send "command done"'
 fi
 
+if command -v thefuck > /dev/null 2>&1; then
+  eval $(thefuck --alias)
+fi
+
+
 if command -v terraform > /dev/null 2>&1; then
   alias tf='terraform'
   alias tfa='terraform apply'

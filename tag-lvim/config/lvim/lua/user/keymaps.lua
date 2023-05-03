@@ -9,6 +9,12 @@ local keymap = vim.keymap.set
 keymap("n", "<C-Space>", "<cmd>WhichKey \\<space><cr>", opts)
 keymap("n", "<C-i>", "<C-i>", opts)
 
+keymap("n", "s", "<Plug>(leap-forward)", opts)
+keymap("n", "S", "<Plug>(leap-backward)", opts)
+
+keymap("n", "<PageUp>", "<cmd> call smoothie#upwards()<cr>", opts)
+keymap("n", "<PageDown>", "<cmd> call smoothie#downwards()<cr>", opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<m-h>", "<C-w>h", opts)
@@ -38,6 +44,10 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+keymap("n", "<c-j>", "<c-d>", opts)
+keymap("n", "<c-k>", "<c-u>", opts)
+keymap("n", "<c-m>", "<s-m>", opts)
+
 keymap("n", "n", "nzz", opts)
 keymap("n", "N", "Nzz", opts)
 keymap("n", "*", "*zz", opts)
@@ -45,16 +55,14 @@ keymap("n", "#", "#zz", opts)
 keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
 
----- leap ----
-keymap('n', "<C-s>", '<Plug>(leap-forward)', {})
-keymap('n', "<C-n>", '<Plug>(leap-backward)', {})
-
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
-keymap("v", "p", '"_dP', opts)
+
+keymap("x", "p", [["_dP]])
+-- keymap("v", "p", '"_dp', opts)
 -- keymap("v", "P", '"_dP', opts)
 
 keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
@@ -66,7 +74,6 @@ keymap(
   opts
 )
 keymap("n", "<F7>", "<cmd>TSHighlightCapturesUnderCursor<cr>", opts)
-keymap("n", "<C-z>", "<cmd>ZenMode<cr>", opts)
 keymap("n", "-", ":lua require'lir.float'.toggle()<cr>", opts)
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 keymap("n", "<m-v>", "<cmd>lua require('lsp_lines').toggle()<cr>", opts)

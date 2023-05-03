@@ -1,59 +1,99 @@
--- Additional Plugins
 lvim.plugins = {
-  "windwp/nvim-spectre",
-  "rafi/awesome-vim-colorschemes",
-  "kylechui/nvim-surround",
-  "ggandor/leap.nvim",
-  "karb94/neoscroll.nvim",
-  "p00f/nvim-ts-rainbow",
-  "windwp/nvim-ts-autotag",
-  "jose-elias-alvarez/typescript.nvim",
-  "folke/zen-mode.nvim",
-  "mfussenegger/nvim-dap-python",
-  "mxsdev/nvim-dap-vscode-js",
-  "theprimeagen/harpoon",
-  "nacro90/numb.nvim",
-  "TimUntersberger/neogit",
-  "sindrets/diffview.nvim",
-  "MattesGroeger/vim-bookmarks",
-  "NvChad/nvim-colorizer.lua",
-  "folke/todo-comments.nvim",
-  "monaqa/dial.nvim",
-  "f-person/git-blame.nvim",
-  "ruifm/gitlinker.nvim",
-  "mattn/vim-gist",
-  "lvimuser/lsp-inlayhints.nvim",
   {
     "folke/trouble.nvim",
-      cmd = "TroubleToggle",
+    cmd = "TroubleToggle",
   },
-  "wakatime/vim-wakatime",
   {
-    "tzachar/cmp-tabnine",
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-  },
-  { "zbirenbaum/copilot.lua",
-    event = { "VimEnter" },
+    "folke/todo-comments.nvim",
+    event = "BufRead",
     config = function()
-      vim.defer_fn(function()
-        require("copilot").setup {
-          plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
-        }
-      end, 100)
+      require("todo-comments").setup()
     end,
-  },
-
-  { "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua", "nvim-cmp" },
   },
   {
     "jinh0/eyeliner.nvim",
     config = function()
       require("eyeliner").setup {
-        highlight_on_key = false,
+        highlight_on_key = true,
       }
     end,
   },
+  {
+    'uloco/bluloco.nvim',
+    lazy = false,
+    priority = 1000,
+    dependencies = { 'rktjmp/lush.nvim' },
+    config = function()
+      -- your optional config goes here, see below.
+    end,
+  },
+  "monaqa/dial.nvim",
+  "kylechui/nvim-surround",
+  "opalmay/vim-smoothie",
+  "TimUntersberger/neogit",
+  "sindrets/diffview.nvim",
+  "ggandor/leap.nvim",
+  "MattesGroeger/vim-bookmarks",
+  "windwp/nvim-spectre",
+  {
+    "Bryley/neoai.nvim",
+    dependencies = {
+        "MunifTanjim/nui.nvim",
+    },
+    cmd = {
+        "NeoAI",
+        "NeoAIOpen",
+        "NeoAIClose",
+        "NeoAIToggle",
+        "NeoAIContext",
+        "NeoAIContextOpen",
+        "NeoAIContextClose",
+        "NeoAIInject",
+        "NeoAIInjectCode",
+        "NeoAIInjectContext",
+        "NeoAIInjectContextCode",
+    },
+    keys = {
+        { "<leader>as", desc = "summarize text" },
+        { "<leader>ag", desc = "generate git message" },
+    },
+    config = function()
+        require("neoai").setup({
+            -- Options go here
+        })
+    end,
+},
+{
+    "cbochs/grapple.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+},
+  {
+    "cbochs/portal.nvim",
+    -- Optional dependencies
+    dependencies = {
+        "cbochs/grapple.nvim",
+        "ThePrimeagen/harpoon"
+    },
+},
+  {
+  "AckslD/nvim-neoclip.lua",
+  dependencies = {
+    -- you'll need at least one of these
+    {'nvim-telescope/telescope.nvim'},
+    -- {'ibhagwan/fzf-lua'},
+  },
+},
 }
+
+
+table.insert(lvim.plugins, {
+  "zbirenbaum/copilot-cmp",
+  event = "InsertEnter",
+  dependencies = { "zbirenbaum/copilot.lua" },
+  config = function()
+    vim.defer_fn(function()
+      require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+      require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+    end, 100)
+  end,
+})

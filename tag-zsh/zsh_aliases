@@ -298,6 +298,10 @@ if command -v thefuck > /dev/null 2>&1; then
   eval $(thefuck --alias)
 fi
 
+if command -v home-manager > /dev/null 2>&1; then
+  alias hme='home-manager edit'
+  alias hms='home-manager switch'
+fi
 
 if command -v terraform > /dev/null 2>&1; then
   alias tf='terraform'

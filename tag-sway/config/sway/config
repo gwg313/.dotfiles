@@ -8,7 +8,7 @@ set $term foot
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 #set $menu rofi -modi combi -show combi -combi-modi drun,run -font "Noto Sans 11" -bw 0 -separator-style solid
 
-output * background ~/.wallpapers/white.jpg fill
+output * background ~/.wallpapers/trippy.jpg fill
 
 set $rofi_cmd rofi \
         -run-command 'swaymsg exec -- {cmd}' \

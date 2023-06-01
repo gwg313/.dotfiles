@@ -35,6 +35,8 @@ lvim.plugins = {
   "ggandor/leap.nvim",
   "MattesGroeger/vim-bookmarks",
   "windwp/nvim-spectre",
+  "loctvl842/monokai-pro.nvim",
+  "lunarvim/synthwave84.nvim",
   {
     "Bryley/neoai.nvim",
     dependencies = {

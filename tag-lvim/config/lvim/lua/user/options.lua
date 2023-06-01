@@ -1,6 +1,6 @@
 -- lvim.colorscheme = "darkplus"
 -- lvim.colorscheme = "poimandres"
-lvim.colorscheme = "bluloco"
+lvim.colorscheme = "monokai-pro"
 lvim.log.level = "warn"
 lvim.builtin.alpha.active = true
 lvim.lsp.diagnostics.float.focusable = true
